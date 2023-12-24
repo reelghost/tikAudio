@@ -26,6 +26,17 @@ inputElement.addEventListener('input', function(event) {
         downloadMusicButton.style.display = 'block';
 
         // Add event listener to the download button
+        // downloadMusicButton.addEventListener('click', function() {
+        //   const downloadLink = document.createElement('a');
+        //   downloadLink.href = musicUrl;
+        //   downloadLink.download = `${responseData.title}.mp3`;
+        //   downloadLink.target = '_blank';
+
+        //   document.body.appendChild(downloadLink);
+        //   downloadLink.click();
+        //   document.body.removeChild(downloadLink);
+        // });
+        // fix
         downloadMusicButton.addEventListener('click', function() {
           const downloadLink = document.createElement('a');
           downloadLink.href = musicUrl;
@@ -36,6 +47,10 @@ inputElement.addEventListener('input', function(event) {
           downloadLink.click();
           document.body.removeChild(downloadLink);
         });
+        //
+        // Assuming you want to trigger the download programmatically
+
+        
       })
       .catch(error => {
         console.error('Error:', error);

@@ -26,15 +26,29 @@ inputElement.addEventListener('input', function(event) {
         downloadMusicButton.style.display = 'block';
 
         // Add event listener to the download button
-        downloadMusicButton.addEventListener('click', function() {
-          const downloadLink = document.createElement('a');
-          downloadLink.href = musicUrl;
-          downloadLink.download = `${responseData.title}.mp3`;
-          downloadLink.target = '_blank';
+        // downloadMusicButton.addEventListener('click', function() {
+        //   const downloadLink = document.createElement('a');
+        //   downloadLink.href = musicUrl;
+        //   downloadLink.download = `${responseData.title}.mp3`;
+        //   downloadLink.target = '_blank';
 
-          document.body.appendChild(downloadLink);
-          downloadLink.click();
-          document.body.removeChild(downloadLink);
+        //   document.body.appendChild(downloadLink);
+        //   downloadLink.click();
+        //   document.body.removeChild(downloadLink);
+        // });
+        downloadMusicButton.addEventListener('click', function() {
+          const iframe = document.createElement('iframe');
+          iframe.style.display = 'none'; // Hide the iframe
+        
+          // Set the source of the iframe to trigger the download
+          iframe.src = musicUrl + `?title=${encodeURIComponent(responseData.title)}.mp3`;
+          
+          document.body.appendChild(iframe);
+        
+          // Remove the iframe after a short delay to trigger the download
+          setTimeout(() => {
+            document.body.removeChild(iframe);
+          }, 500);
         });
       })
       .catch(error => {

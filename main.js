@@ -1,5 +1,6 @@
 const inputElement = document.getElementById('tiktokURL');
-const resultContainer = document.getElementById('resultContainer');
+const coverImageElement = document.getElementById('coverImage');
+const downloadMusicLink = document.getElementById('downloadMusicLink');
 
 inputElement.addEventListener('input', function(event) {
   const url = event.target.value;
@@ -15,42 +16,16 @@ inputElement.addEventListener('input', function(event) {
         const coverImageUrl = responseData.cover;
         const musicUrl = responseData.music_info.play;
 
-        const coverImageElement = document.getElementById('coverImage');
-        const downloadMusicButton = document.getElementById('downloadMusicButton');
-
         coverImageElement.src = coverImageUrl;
         coverImageElement.alt = responseData.title;
 
-        // Show the image and download button
+        // Show the image and download link
         coverImageElement.style.display = 'block';
-        downloadMusicButton.style.display = 'block';
+        downloadMusicLink.style.display = 'block';
 
-        // Add event listener to the download button
-        // downloadMusicButton.addEventListener('click', function() {
-        //   const downloadLink = document.createElement('a');
-        //   downloadLink.href = musicUrl;
-        //   downloadLink.download = `${responseData.title}.mp3`;
-        //   downloadLink.target = '_blank';
-
-        //   document.body.appendChild(downloadLink);
-        //   downloadLink.click();
-        //   document.body.removeChild(downloadLink);
-        // });
-        // fix
-        downloadMusicButton.addEventListener('click', function() {
-          const downloadLink = document.createElement('a');
-          downloadLink.href = musicUrl;
-          downloadLink.download = `${responseData.title}.mp3`;
-          downloadLink.target = '_blank';
-
-          document.body.appendChild(downloadLink);
-          downloadLink.click();
-          document.body.removeChild(downloadLink);
-        });
-        //
-        // Assuming you want to trigger the download programmatically
-
-        
+        // Update download link attributes
+        downloadMusicLink.href = musicUrl;
+        downloadMusicLink.download = `${responseData.title}.mp3`;
       })
       .catch(error => {
         console.error('Error:', error);
@@ -59,4 +34,28 @@ inputElement.addEventListener('input', function(event) {
     console.error('Invalid TikTok URL');
     // Display an error message to the user or handle the invalid URL case
   }
+});
+
+downloadMusicLink.addEventListener('click', function(event) {
+  const musicUrl = this.href;
+  const title = this.download;
+
+  if (musicUrl && title) {
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none'; // Hide the iframe
+  
+    // Set the source of the iframe to trigger the download
+    iframe.src = musicUrl + `?title=${encodeURIComponent(title)}.mp3`;
+    
+    document.body.appendChild(iframe);
+  
+    // Remove the iframe after a short delay to trigger the download
+    setTimeout(() => {
+      document.body.removeChild(iframe);
+    }, 500);
+  } else {
+    console.error('Invalid music URL or title');
+  }
+
+  event.preventDefault(); // Prevent the default behavior of the link
 });

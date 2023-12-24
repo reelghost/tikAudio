@@ -30,6 +30,7 @@ inputElement.addEventListener('input', function(event) {
           const downloadLink = document.createElement('a');
           downloadLink.href = musicUrl;
           downloadLink.download = `${responseData.title}.mp3`;
+          downloadLink.target = '_blank';
 
           document.body.appendChild(downloadLink);
           downloadLink.click();

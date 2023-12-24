@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="relative h-screen bg-gradient-to-r from-red-500 to-orange-500 flex justify-center items-center">
+        <div class="">
+            <h1 class="mb-4 text-6xl bg-gradient-to-br from-red-600 to-gray-900 bg-clip-text text-transparent font-bold">Tiktok Audio Downloader</h1>
+            <form class="w-full flex items-center justify-center mb-4" id="tiktokForm">
+                <input class="p-3 rounded-md w-[50%] outline-none" type="text" name="tiktok-url" id="tiktokURL" placeholder="Paste the Tiktok URL">
+            </form>
+            <div class="flex items-center justify-center gap-4">
+                <img class="w-28 h-28 rounded-lg" id="coverImage" style="display: none;">
+            </div>
+            <div class="flex justify-center mt-4">
+                <button class="text-sm bg-blue-700 text-white font-bold p-2 rounded-md uppercase" id="downloadMusicButton" style="display: none;">Download Music</button>
+            </div>
+        </div>
+    <footer class="absolute bottom-4 flex justify-center items-center">
+        <p class="text-black text-sm">Made with love by <span class="font-bold">Reelghost</span></p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

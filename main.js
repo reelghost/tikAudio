@@ -13,12 +13,16 @@ inputElement.addEventListener('input', function(event) {
       .then(response => {
         const responseData = response.data.data;
         console.log(responseData);
+        // filename
+        const filenameWithSpaces = responseData.title;
+        // Sanitize the filename by replacing spaces with underscores
+        const sanitizedFilename = filenameWithSpaces.replace(/\s+/g, '_');
 
         const coverImageUrl = responseData.cover;
         const musicUrl = responseData.music;
 
         coverImageElement.src = coverImageUrl;
-        coverImageElement.alt = responseData.title;
+        coverImageElement.alt = sanitizedFilename;
 
         // Show the image and download link
         coverImageElement.style.display = 'block';
@@ -26,7 +30,7 @@ inputElement.addEventListener('input', function(event) {
 
         // Update download link attributes
         downloadMusicLink.href = musicUrl;
-        downloadMusicLink.download = `${responseData.title}.mp3`;
+        downloadMusicLink.download = `${sanitizedFilename}.mp3`;
 
         // show the author name
         tiktokAuthor.textContent = responseData.author.nickname;

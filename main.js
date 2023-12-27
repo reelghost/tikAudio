@@ -1,6 +1,7 @@
 const inputElement = document.getElementById('tiktokURL');
 const coverImageElement = document.getElementById('coverImage');
 const downloadMusicLink = document.getElementById('downloadMusicLink');
+const tiktokAuthor = document.getElementById('authorName');
 
 inputElement.addEventListener('input', function(event) {
   const url = event.target.value;
@@ -14,7 +15,7 @@ inputElement.addEventListener('input', function(event) {
         console.log(responseData);
 
         const coverImageUrl = responseData.cover;
-        const musicUrl = responseData.music_info.play;
+        const musicUrl = responseData.music;
 
         coverImageElement.src = coverImageUrl;
         coverImageElement.alt = responseData.title;
@@ -25,7 +26,10 @@ inputElement.addEventListener('input', function(event) {
 
         // Update download link attributes
         downloadMusicLink.href = musicUrl;
-        //downloadMusicLink.download = `${responseData.title}.mp3`;
+        downloadMusicLink.download = `${responseData.title}.mp3`;
+
+        // show the author name
+        tiktokAuthor.textContent = responseData.author.nickname;
       })
       .catch(error => {
         console.error('Error:', error);

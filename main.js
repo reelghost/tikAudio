@@ -30,6 +30,7 @@ inputElement.addEventListener('input', function(event) {
 
         // Update download link attributes
         downloadMusicLink.href = musicUrl;
+        downloadMusicLink.target = "_blank";
         downloadMusicLink.download = `${sanitizedFilename}.mp3`;
 
         // show the author name
